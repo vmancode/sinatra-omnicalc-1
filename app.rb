@@ -1,5 +1,6 @@
 require "sinatra"
 require "sinatra/reloader"
+require "active_support/all"
 
 get("/") do
   "
@@ -41,8 +42,14 @@ get ("/payment/new") do
         
 get ("/payment/results") do
           @num3 = params.fetch("num3").to_f
+          @num9 = @num3.to_fs(:percentage, {:precision => 4})
+          @num6 = @num3/100/12
           @num4 = params.fetch("num4").to_f
+          @num11 = @num4.to_i
+          @num7 = @num4 *12
           @num5 = params.fetch("num5").to_f
-          @num5result = params.fetch("num3").to_f 
+          @num8 = @num5.to_fs(:currency, { :precision => 2 })
+          @num5result = (@num6 * @num5) / (1 - (1+@num6)**(-@num7))
+          @num10 = @num5result.to_fs(:currency, { :precision => 2 })
         erb(:payment_results)
           end
