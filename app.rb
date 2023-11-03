@@ -27,7 +27,7 @@ erb(:new_square_results)
     end
     
     get ("/square_root/results") do
-      @num2 = params.fetch("number2").to_f
+      @num2 = params.fetch("number2").to_i
       @num2result = params.fetch("number2").to_f ** 0.5
     erb(:new_sqrt_results)
       end
@@ -53,3 +53,20 @@ get ("/payment/results") do
           @num10 = @num5result.to_fs(:currency, { :precision => 2 })
         erb(:payment_results)
           end
+
+
+
+
+
+
+          get ("/random/new") do
+            erb(:random_new)
+            end
+            
+            get ("/random/results") do
+              @num12 = params.fetch("num12").to_f
+              @num13 = params.fetch("num13").to_f 
+              @num15 = rand(@num12..@num13)
+              @num14 = @num15
+            erb(:random_result)
+              end
